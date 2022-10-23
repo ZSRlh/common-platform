@@ -44,3 +44,34 @@ npm run build
 ```sh
 npm run lint
 ```
+# Vite + Vue3(TS) + Pinia + Antdv
+支持setup语法；
+
+antdv 配置
+- 按需引入
+```sh
+npm install unplugin-vue-components --save-dev
+```
+vite.config.ts
+```ts
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+
+export default defineConfig({
+  plugins: [
+    /* ... */
+    Components({
+      resolvers: [AntDesignVueResolver()],
+    })
+  ],
+```
+antd组件类型配置
+tsconfig.json
+```json
+"compilerOptions": {
+  /* ... */
+  "types": [  // 需要包含的类型声明文件列表
+    "ant-design-vue/typings/global"
+  ]
+  },
+```

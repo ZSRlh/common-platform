@@ -47,8 +47,8 @@ npm run lint
 # Vite + Vue3(TS) + Pinia + Antdv
 支持setup语法；
 
-antdv 配置
-- 按需引入
+## antdv 配置
+### 按需引入
 ```sh
 npm install unplugin-vue-components --save-dev
 ```
@@ -64,8 +64,9 @@ export default defineConfig({
       resolvers: [AntDesignVueResolver()],
     })
   ],
+})
 ```
-antd组件类型配置
+### antd组件类型配置
 tsconfig.json
 ```json
 "compilerOptions": {
@@ -75,3 +76,27 @@ tsconfig.json
   ]
   },
 ```
+
+## less 配置
+依赖less，vite中不需要less-loader
+```sh
+npm install less -D
+```
+vite.config.ts
+```ts
+export default defineConfig({
+  /* ... */
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: {
+          // 全局less变量路径
+          hack: `true; @import (reference) "${resolve("src/assets/less/index.less")}"`
+        },
+        javascriptEnabled: true,
+      }
+    }
+  }
+})
+```
+

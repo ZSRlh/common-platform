@@ -100,3 +100,31 @@ export default defineConfig({
 })
 ```
 
+## mock配置
+vite.config.ts
+```ts
+export default defineConfig(({ command }): UserConfig => ({
+  plugins: [
+    // ...
+    viteMockServe({
+      ignore: /^index/, // 忽略index的编译，否则在里面使用import.meta.glob会报类型错误，这个是vite特有的其他编译工具无法识别
+      mockPath: 'src/mock', // 解析mock文件目录
+      localEnabled: command === 'serve',  // 开发打包开关
+      prodEnabled: command !== 'serve',   // 生产打包开关
+      supportTs: true,  // 打开后，无法监视js
+      // 控制关闭mock的时候，不让mock打包到最终的代码内
+      injectCode: `
+        import { setupProdMockServer } from './src/mock';
+        setupProdMockServer();
+      `
+    })
+  ],
+}));
+```
+
+或者在main.ts中配置也可以，这里和vite.config.ts中的配置有一个即可，vite.config.ts中更完善。
+```ts
+if (import.meta.env.MODE === 'development') {
+  setupProdMockServer();
+}
+```

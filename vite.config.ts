@@ -12,9 +12,6 @@ import { resolve } from "node:path";
 import { viteMockServe } from 'vite-plugin-mock';
 
 export default defineConfig(({ command }): UserConfig => ({
-  build: {
-    target: 'es2015',
-  },
   plugins: [
     vue(),
     Components({

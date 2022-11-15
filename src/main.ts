@@ -5,8 +5,14 @@ import Antdv from 'ant-design-vue';
 import App from "./App.vue";
 import router from "./router";
 
-import "./assets/main.css";
+import "./assets/style/main.css";
 import 'ant-design-vue/dist/antd.css'; // 引入antd样式
+
+import { setupProdMockServer } from './mock';
+
+if (import.meta.env.MODE === 'development') {
+  setupProdMockServer();
+}
 
 const app = createApp(App);
 

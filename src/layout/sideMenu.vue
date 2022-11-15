@@ -37,7 +37,7 @@ const openKeys = ref();
 const menuItems = ref();
 //TODO: 菜单添加图标
 watchEffect(() => {
-  menuItems.value = sideMenu.value.map(item => {
+  menuItems.value = sideMenu?.value.map(item => {
     return {
       ...item,
       key: item.key,
@@ -46,8 +46,8 @@ watchEffect(() => {
       disable: false,
     }
   });
-  selectedKeys.value = [sideMenu.value[0].key];
-  openKeys.value = [sideMenu.value[0].key];
+  selectedKeys.value = [sideMenu.value[0]?.key];
+  openKeys.value = [sideMenu.value[0]?.key];
 })
 
 </script>

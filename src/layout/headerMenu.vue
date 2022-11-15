@@ -15,18 +15,26 @@
 <script lang="ts" setup>
 import { useMenuStore } from '@/stores/menu';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 const menuStore = useMenuStore();
 const { headerMenu, currentHeaderNav } = storeToRefs(menuStore);
 
-const menuItems = ref(headerMenu.value.map(item => {
-  return {
-    key: item.key,
-    icon: item.icon || 'defaultIcon',
-    title: item.title,
-    disable: false,
-  }
-}));
+const menuItems = ref();
+
+watch(headerMenu, (val) => {
+  menuItems.value = val.map(item => {
+    return {
+      key: item.key,
+      icon: item.icon || 'defaultIcon',
+      title: item.title,
+      disable: false,
+    }
+  })
+})
+
+onMounted(() => {
+  menuStore.getMenus();
+})
 
 </script>

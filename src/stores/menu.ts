@@ -1,15 +1,7 @@
 import { reactive, toRefs, watch } from "vue";
 import { defineStore } from 'pinia';
-import axios from 'axios';
-
-export interface MenuDataItem {
-  key: string;
-  title: string;
-  icon?: string;
-  level: number;
-  isDir?: boolean;
-  children?: MenuDataItem[];
-}
+import service from "@/assets/axios";
+import type { MenuDataItem, MenuReq, MenuRes } from "@/types/menu";
 
 export const useMenuStore = defineStore("menuStore", () => {
   const menus = reactive<{
@@ -23,9 +15,15 @@ export const useMenuStore = defineStore("menuStore", () => {
   })
 
   const getMenus = async () => {
-    return axios.get('/menu').then(res => {
-      menus.headerMenu = res.data;
-    })
+    return service<MenuReq, MenuRes>({
+      url: '/menu',
+      method: 'get',
+      data: {
+        userName: 'zsr',
+      }
+    }).then(res => {
+      menus.headerMenu = res.menu;
+    });
   };
 
   const setHeaderNav = (menuKey: String) => {

@@ -130,3 +130,51 @@ if (import.meta.env.MODE === 'development') {
 ```
 > main.ts中配置，打印输出是在浏览器中，vite.config.ts中配置，打印在node控制台
 > 两个地方配置，请求参数不同，vite.config中配置的请求没有method，待研究。
+
+
+
+# Vercel 配置
+使用vercel部署前端项目，接口使用apizza mock数据（apizza企业版支持https mock）
+> 仅为学习部署流程，简化后端数据生成，所以采用此方案
+
+项目部署环境和开发环境不同，直接向apizza发送请求会导致跨域，因此需要对vercel进行配置：
+
+在根目录下创建两个文件：
+  1. vercel.json vercel配置；
+  2. api/proxy.js 配置代理；
+
+vercel.json
+```json
+{
+  "rewrites": [
+    {
+      "source": "/rest.apizza.net",   // 要代理的接口路径
+      "destination": "/api/proxy"  // 代理配置文件的位置
+    }
+  ]
+}
+```
+
+api/proxy.js
+> 文件路径随意，代码都可以生效，但是在网站上对构建进行配置的时候只能识别/api/xxx
+
+```sh
+npm install -D http-proxy-middleware
+```
+```js
+// 代理中间件
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+module.exports = (req, res) => {
+  // 代理的目标服务
+  let target = 'http://rest.apizza.net/mock/c93fdfb30dab4ca2008a92a4497f29eb';
+  createProxyMiddleware({
+    target,
+    changeOrigin: true,
+    pathRewrite: {
+      // 重写url路径
+      "^/rest.apizza.net": "/rest.apizza.net"
+    }
+  })(req, res);
+}
+```

@@ -7,8 +7,8 @@ module.exports = (req: any, res: any) => {
   createProxyMiddleware({
     target,
     changeOrigin: true,
-    // pathRewrite: {
-    //   "": ""
-    // }
+    pathRewrite: {
+      "^/": "/"
+    }
   })(req, res);
 }

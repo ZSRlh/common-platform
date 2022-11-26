@@ -1,4 +1,5 @@
 import axios, { type AxiosRequestConfig, type Method } from 'axios';
+import { BASEURL } from '../constants/constants';
 
 export interface serviceConfig<D = any> {
   url: string,
@@ -9,7 +10,7 @@ export interface serviceConfig<D = any> {
 const defaultParams: AxiosRequestConfig = {
   url: '',
   method: 'get',
-  baseURL: 'http://rest.apizza.net/mock/c93fdfb30dab4ca2008a92a4497f29eb',
+  baseURL: BASEURL,
   headers: {},
 }
 const service = <D, T>(requestConfig: serviceConfig<D>): Promise<T> => {

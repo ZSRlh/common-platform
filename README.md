@@ -128,3 +128,4 @@ if (import.meta.env.MODE === 'development') {
   setupProdMockServer();
 }
 ```
+> main.ts中配置，打印输出是在浏览器中，vite.config.ts中配置，打印在node控制台

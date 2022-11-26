@@ -1,6 +1,7 @@
 import type { MenuReq, MenuRes } from '@/types/menu';
 import type { MockMethod } from 'vite-plugin-mock';
-import { getReqDataByMethod, type MockReq } from '../utils';
+import { getReqDataByMethod } from '../utils';
+import type { MockReq } from '../utils';
 
 export const genMenu = (req: MockReq<MenuReq>): MenuRes => {
   const nav1 = {

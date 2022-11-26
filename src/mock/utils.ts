@@ -8,6 +8,6 @@ export interface MockReq<D> {
 }
 
 export const getReqDataByMethod = <D>(req: MockReq<D>): D => {
-  const _method = req.method.toLowerCase();
+  const _method = req.method?.toLowerCase();
   return _method === 'get' ? req.query : req.body;
 }

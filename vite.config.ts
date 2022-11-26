@@ -25,7 +25,7 @@ export default defineConfig(({ command }): UserConfig => ({
       supportTs: true,  // 打开后，无法监视js
       // 控制关闭mock的时候，不让mock打包到最终的代码内
       injectCode: `
-        import { setupProdMockServer } from './src/mock';
+        import { setupProdMockServer } from './mock';
         setupProdMockServer();
       `
     })

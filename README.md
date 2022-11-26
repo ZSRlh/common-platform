@@ -122,10 +122,11 @@ export default defineConfig(({ command }): UserConfig => ({
 }));
 ```
 
-或者在main.ts中配置也可以，这里和vite.config.ts中的配置有一个即可，vite.config.ts中更完善。
+或者在main.ts中配置也可以，这里和vite.config.ts中的配置有一个即可。
 ```ts
 if (import.meta.env.MODE === 'development') {
   setupProdMockServer();
 }
 ```
 > main.ts中配置，打印输出是在浏览器中，vite.config.ts中配置，打印在node控制台
+> 两个地方配置，请求参数不同，vite.config中配置的请求没有method，待研究。

@@ -6,7 +6,7 @@ module.exports = (req, res) => {
     target,
     changeOrigin: true,
     pathRewrite: {
-      "^/": "/"
+      "^/rest.apizza.net": "/rest.apizza.net"
     }
   })(req, res);
 }

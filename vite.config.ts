@@ -24,10 +24,10 @@ export default defineConfig(({ command }): UserConfig => ({
       prodEnabled: command !== 'serve',   // 生产打包开关
       supportTs: true,  // 打开后，无法监视js
       // 控制关闭mock的时候，不让mock打包到最终的代码内, 请求的结构和main.ts中配置的不一样
-      injectCode: `
-        import { setupProdMockServer } from './mock';
-        setupProdMockServer();
-      `
+      // injectCode: `
+      //   import { setupProdMockServer } from './mock';
+      //   setupProdMockServer();
+      // `
     })
   ],
   resolve: {

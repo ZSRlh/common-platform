@@ -2,7 +2,7 @@ import { BASEURL } from "@/assets/constants/constants";
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = (req, res) => {
+module.exports = (req: any, res: any) => {
   let target = BASEURL;
   createProxyMiddleware({
     target,

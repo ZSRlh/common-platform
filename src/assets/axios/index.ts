@@ -10,7 +10,7 @@ export interface serviceConfig<D = any> {
 const defaultParams: AxiosRequestConfig = {
   url: '',
   method: 'get',
-  baseURL: BASEURL,
+  baseURL: '',
   headers: {},
 }
 const service = <D, T>(requestConfig: serviceConfig<D>): Promise<T> => {
